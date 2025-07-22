@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "974599206277",
+    "project_id": "eatright-ai-app-2025-anmol",
+    "storage_bucket": "eatright-ai-app-2025-anmol.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:974599206277:android:ad2d565546fb0a439d40ec",
+        "android_client_info": {
+          "package_name": "com.example.eatright_ai"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOQ3JDoyjsR_1XFbNr6F1auJttiTujVtY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
