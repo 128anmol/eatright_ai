@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'personal_details_screen.dart';
 
 class SignupScreen extends StatelessWidget {
@@ -7,15 +8,27 @@ class SignupScreen extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
+  Future<void> saveUserProfile(User user, {String? name}) async {
+    final doc = FirebaseFirestore.instance.collection('users').doc(user.uid);
+    await doc.set({
+      'uid': user.uid,
+      'email': user.email,
+      'name': name ?? user.displayName,
+      'photoURL': user.photoURL,
+      'lastLogin': FieldValue.serverTimestamp(),
+    }, SetOptions(merge: true));
+  }
+
   @override
   Widget build(BuildContext context) {
     Future<void> _signup() async {
       try {
-        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        final cred = await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: emailController.text.trim(),
           password: passwordController.text.trim(),
         );
         await FirebaseAuth.instance.currentUser?.updateDisplayName(nameController.text.trim());
+        await saveUserProfile(cred.user!, name: nameController.text.trim());
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (_) => PersonalDetailsScreen()),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'home_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
@@ -7,61 +8,87 @@ class WelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFFF8F1),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 32.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(
-                'assets/logo.jpg',
-                height: 180,
-              ),
-              const SizedBox(height: 40),
-              Text(
-                'Welcome to EatRight AI 👋',
-                style: const TextStyle(
-                  fontSize: 28,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFF333333),
-                  fontFamily: 'Poppins',
-                ),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 16),
-              Text(
-                "Scan your food to get instant health insights!",
-                style: const TextStyle(
-                  fontSize: 16,
-                  color: Colors.black87,
-                  fontFamily: 'OpenSans',
-                ),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 40),
-              ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF2D8C8C),
-                  padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 16),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Color(0xFF2D8C8C), Color(0xFFFFA726)],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+        ),
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 32.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // Logo with shadow
+                Container(
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black26,
+                        blurRadius: 24,
+                        offset: Offset(0, 8),
+                      ),
+                    ],
+                    shape: BoxShape.circle,
                   ),
-                  textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                  child: CircleAvatar(
+                    backgroundImage: AssetImage('assets/logo.jpg'),
+                    radius: 60,
+                  ),
                 ),
-                icon: const Icon(Icons.camera_alt, color: Colors.white),
-                label: const Text(
-                  'Start Scanning',
-                  style: TextStyle(color: Colors.white),
+                const SizedBox(height: 40),
+                // Styled welcome text (no emoji)
+                Text(
+                  'Welcome to EatRight AI',
+                  style: GoogleFonts.poppins(
+                    fontSize: 32,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                    shadows: [
+                      Shadow(
+                        blurRadius: 8,
+                        color: Colors.black26,
+                        offset: Offset(2, 2),
+                      ),
+                    ],
+                  ),
+                  textAlign: TextAlign.center,
                 ),
-                onPressed: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (_) => const HomeScreen()),
-                  );
-                },
-              ),
-            ],
+                const SizedBox(height: 16),
+                Text(
+                  "Scan your food to get instant health insights!",
+                  style: GoogleFonts.openSans(
+                    fontSize: 18,
+                    color: Colors.white70,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 40),
+                ElevatedButton.icon(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.white,
+                    foregroundColor: Color(0xFF2D8C8C),
+                    padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 16),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                    elevation: 8,
+                  ),
+                  icon: const Icon(Icons.camera_alt),
+                  label: const Text('Start Scanning'),
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (_) => HomeScreen()),
+                    );
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),
